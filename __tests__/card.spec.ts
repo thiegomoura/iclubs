@@ -1,8 +1,5 @@
 describe("Create card", () => {
-    it("Teste", () => {
-        const isTrue = true;
-        const result = true;
-
-        expect(isTrue).toBe(true);
-    });
+    it('Testing to see if Jest works', () => {
+        expect(1).toBe(1)
+    })
 });
