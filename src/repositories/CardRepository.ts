@@ -6,6 +6,10 @@ interface ICreateCardDTO {
     content: string;
 }
 
+interface IEditCardDTO {
+    id: string;
+}
+
 class CardRepository {
     private cards: Card[] = [];
 
@@ -32,6 +36,18 @@ class CardRepository {
         this.cards.push(card);
 
         return card;
+    }
+
+    edit({ id }: IEditCardDTO): void {
+
+    }
+
+    setToDone({ id }: IEditCardDTO): void {
+
+    }
+
+    delete({ id }: IEditCardDTO): void {
+
     }
 }
 
