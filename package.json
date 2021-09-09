@@ -41,9 +41,6 @@
         },
         "testMatch": [
             "**/__tests__/*.+(ts|tsx|js)"
-        ],
-        "setupFilesAfterEnv": [
-            "jest-extended"
         ]
     }
 }

@@ -57,7 +57,8 @@ describe("Card", () => {
             .send(editedCard)
             .expect(200);
 
-        expect(cardResponse.body).toEqual(editedCard);
+        expect(cardResponse.body.title).toEqual('New title');
+        expect(cardResponse.body.content).toEqual('New content');
     })
 
     it('it should be able set to done a card', async () => {
@@ -77,7 +78,7 @@ describe("Card", () => {
             .patch(`/cards/${id}/done`)
             .expect(200);
 
-        expect(cardResponse.body.attend).toBe(true);
+        expect(cardResponse.body.attend).toEqual(true);
     })
 
     it('should be able to delete a car', async () => {
