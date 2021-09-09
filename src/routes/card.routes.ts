@@ -1,45 +1,15 @@
 import { Router } from 'express';
-import { v4 as uuid, } from 'uuid';
-import CardRepository from '../repositories/CardRepository';
+
+import CardController from '../app/controllers/CardController';
 
 const cardsRouter = Router();
-const cardsRepository = new CardRepository();
 
-cardsRouter.get('/', (request, response) => {
-    const allCards = cardsRepository.index();
+cardsRouter.get('/', CardController.index);
 
-    return response.json(allCards);
-});
+cardsRouter.post('/', CardController.create);
 
-cardsRouter.post('/', (request, response) => {
-    const { title, content } = request.body;
-
-    const card = cardsRepository.create({ title, content });
-
-    return response.status(201).json(card);
-})
-
-cardsRouter.put('/:id', (request, response) => {
-    const { id } = request.params;
-    const { title, content } = request.body;
-
-    const card = cardsRepository.edit({ id, title, content });
-
-    return response.status(200).json(card);
-});
-cardsRouter.patch('/:id/done', (request, response) => {
-    const { id } = request.params;
-
-    const card = cardsRepository.setToDone({ id });
-
-    return response.status(200).json(card);
-});
-cardsRouter.delete('/:id', (request, response) => {
-    const { id } = request.params;
-
-    cardsRepository.delete({ id });
-
-    return response.status(204).send();
-});
+cardsRouter.put('/:id', CardController.edit);
+cardsRouter.patch('/:id/done', CardController.setToDone);
+cardsRouter.delete('/:id', CardController.delete);
 
 export default cardsRouter;
