@@ -1,5 +1,14 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+    BeforeInsert,
+    BeforeUpdate
+} from 'typeorm';
 
+import { hashSync } from 'bcryptjs';
 @Entity('users')
 class User {
     @PrimaryGeneratedColumn('uuid')
@@ -12,8 +21,16 @@ class User {
     password: string;
 
     @CreateDateColumn()
-    created_at: Date;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updated_at: Date;
+    updatedAt: Date;
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    hashPassword() {
+        this.password = hashSync(this.password, 8);
+    }
 }
+
+export default User;

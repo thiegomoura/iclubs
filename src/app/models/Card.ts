@@ -15,10 +15,10 @@ class Card {
     attend: boolean;
 
     @CreateDateColumn()
-    created_at: Date;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    update_at: Date;
+    updatedAt: Date;
 }
 
-export default Card
+export default Card;
