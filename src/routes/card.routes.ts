@@ -25,9 +25,9 @@ cardsRouter.get('/', (request, response) => {
 cardsRouter.post('/', (request, response) => {
     const { title, content } = request.body;
 
-    cardsRepository.create({ title, content });
+    const card = cardsRepository.create({ title, content });
 
-    return response.status(201).send();
+    return response.status(201).json(card);
 })
 
 cardsRouter.put('/:id', (request, response) => {

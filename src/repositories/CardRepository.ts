@@ -17,7 +17,7 @@ class CardRepository {
         return this.cards;
     }
 
-    create({ title, content }: ICreateCardDTO): void {
+    create({ title, content }: ICreateCardDTO): Card {
         const card = new Card();
 
         Object.assign(card, {
@@ -30,6 +30,8 @@ class CardRepository {
         });
 
         this.cards.push(card);
+
+        return card;
     }
 }
 
