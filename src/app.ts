@@ -1,6 +1,6 @@
 import "reflect-metadata";
-import * as express from 'express';
-import * as dotenv from 'dotenv';
+import express from 'express';
+import dotenv from 'dotenv';
 import routes from './routes';
 
 import './database/connect';

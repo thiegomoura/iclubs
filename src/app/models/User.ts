@@ -7,8 +7,8 @@ import {
     BeforeInsert,
     BeforeUpdate
 } from 'typeorm';
-
 import { hashSync } from 'bcryptjs';
+
 @Entity('users')
 class User {
     @PrimaryGeneratedColumn('uuid')

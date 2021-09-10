@@ -1,5 +1,5 @@
 import app from "../app";
-import * as request from "supertest";
+import request from "supertest";
 
 describe("Card", () => {
     it("should be able to list all cards", async () => {
