@@ -13,12 +13,12 @@ class UserController {
         if (!email || !password)
             return response.status(401).json({ error: 'User need email and password to be created' });
 
-        const checkUserExists = await repository.findOne(email)
+        const checkUserExists = await repository.findOne({ where: { email: email } })
 
-        if (!checkUserExists)
+        if (checkUserExists)
             return response.status(409).json({ error: 'User already exists' });
 
-        const newUser = await repository.create({
+        const newUser = repository.create({
             email,
             password,
             createdAt: new Date(),
@@ -34,7 +34,7 @@ class UserController {
         const repository = getRepository(User);
         const { email, password } = request.body;
 
-        const user = await repository.findOne(email);
+        const user = await repository.findOne({ where: { email: email } });
 
         if (!user)
             return response.status(401).json({ error: 'Invalid credentials' });
@@ -44,8 +44,10 @@ class UserController {
         if (!isValidPassword)
             return response.status(401).json({ error: 'Invalid crendentials' });
 
-        const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1d' });
+        const secret = process.env.JWT_APP_SECRET;
+        const token = jwt.sign({ id: user.id }, secret || 'secret', { expiresIn: '1d' });
 
+        // @ts-expect-error
         delete user.password;
 
         return response.json({ user, token });

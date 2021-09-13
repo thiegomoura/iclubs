@@ -2,7 +2,7 @@ import app from "../app";
 import request from "supertest";
 import bcrypt from "bcryptjs";
 
-describe("Card", () => {
+describe("User", () => {
     it("should be able to create user", async () => {
         const user = {
             email: "user@example.com",
